@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
-from main_ui import Ui_MainWindow
+from design.main_ui import Ui_MainWindow
 
 
 class PrinterMainWindow(QMainWindow):

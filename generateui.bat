@@ -1,0 +1,1 @@
+powershell .\generateui.ps1
