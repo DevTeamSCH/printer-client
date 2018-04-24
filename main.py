@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QListWidgetItem
 
 from design.main_ui import Ui_MainWindow
 from design.printerlistitem_ui import Ui_PrinterListItem
+from options import OptionsDialog
 from printer_api import GetAvailablePrintersThread
 
 
@@ -14,9 +15,11 @@ class PrinterMainWindow(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.load_available_printers()
 
     def openOptionsWindow(self):
-        pass
+        optionsDialog = OptionsDialog()
+        optionsDialog.exec_()
 
     def load_available_printers(self):
         self.thread = GetAvailablePrintersThread()

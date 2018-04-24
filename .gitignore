@@ -105,3 +105,6 @@ ENV/
 
 #UI files
 design/*.py
+
+#Options
+options.json

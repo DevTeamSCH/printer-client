@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>OptionsDialog</class>
+ <widget class="QDialog" name="OptionsDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -80,7 +80,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="apiKeyEdit">
      <property name="placeholderText">
       <string>API Key</string>
      </property>
@@ -110,7 +110,7 @@
   <connection>
    <sender>okCancelButton</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>OptionsDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -126,7 +126,7 @@
   <connection>
    <sender>okCancelButton</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>OptionsDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
