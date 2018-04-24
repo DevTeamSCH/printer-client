@@ -26,7 +26,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <widget class="QListWidget" name="listWidget"/>
+         <widget class="QListWidget" name="available_printer_list"/>
         </item>
        </layout>
       </widget>
@@ -36,7 +36,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <widget class="QListWidget" name="listWidget_2"/>
+         <widget class="QListWidget" name="my_printers_list"/>
         </item>
        </layout>
       </widget>
@@ -46,7 +46,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
-         <widget class="QListWidget" name="listWidget_3"/>
+         <widget class="QListWidget" name="received_files_list"/>
         </item>
        </layout>
       </widget>
