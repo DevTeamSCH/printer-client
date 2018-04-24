@@ -104,4 +104,4 @@ ENV/
 .idea/
 
 #UI files
-main_ui.py
+design/*.py
