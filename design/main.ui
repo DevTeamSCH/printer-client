@@ -67,6 +67,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionRefresh"/>
     <addaction name="actionOptions"/>
     <addaction name="actionExit"/>
    </widget>
@@ -83,6 +84,11 @@
     <string>Exit</string>
    </property>
   </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>
@@ -90,7 +96,7 @@
    <sender>actionOptions</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>openOptionsWindow()</slot>
+   <slot>open_options_window()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -118,8 +124,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionRefresh</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>refresh()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>255</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>openOptionsWindow()</slot>
+  <slot>open_options_window()</slot>
+  <slot>refresh()</slot>
  </slots>
 </ui>

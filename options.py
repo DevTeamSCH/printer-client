@@ -11,7 +11,7 @@ class Options:
         self.apiKey = ""
         self.startWithSystem = False
 
-    def LoadFromFile(self):
+    def load_from_file(self):
         try:
             with open('options.json', 'r') as json_data:
                 d = json.load(json_data)
@@ -21,10 +21,14 @@ class Options:
         except FileNotFoundError:
             pass
 
-    def SaveToFile(self):
+    def save_to_file(self):
         with open('options.json', 'w') as json_data:
-            d = json.dump(self.__dict__, json_data)
+            json.dump(self.__dict__, json_data)
         pass
+
+
+options_instance = Options()
+options_instance.load_from_file()
 
 
 class OptionsDialog(QDialog):
@@ -32,16 +36,13 @@ class OptionsDialog(QDialog):
         super().__init__()
         self.ui = Ui_OptionsDialog()
         self.ui.setupUi(self)
-        options = Options()
-        options.LoadFromFile()
-        self.ui.languageBox.setCurrentText(options.language)
-        self.ui.apiKeyEdit.setText(options.apiKey)
-        self.ui.startBox.setChecked(options.startWithSystem)
+        self.ui.languageBox.setCurrentText(options_instance.language)
+        self.ui.apiKeyEdit.setText(options_instance.apiKey)
+        self.ui.startBox.setChecked(options_instance.startWithSystem)
 
     def accept(self):
-        options = Options()
-        options.language = self.ui.languageBox.currentText()
-        options.apiKey = self.ui.apiKeyEdit.text()
-        options.startWithSystem = self.ui.startBox.isChecked()
-        options.SaveToFile()
+        options_instance.language = self.ui.languageBox.currentText()
+        options_instance.apiKey = self.ui.apiKeyEdit.text()
+        options_instance.startWithSystem = self.ui.startBox.isChecked()
+        options_instance.save_to_file()
         super().accept()

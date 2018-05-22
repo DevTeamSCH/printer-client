@@ -1,9 +1,16 @@
+import requests
 from PyQt5.QtCore import QThread, pyqtSignal
+
+BASE_URL = 'http://donald.sch.bme.hu:4465/api/v1/'
 
 
 def get_available_printers():
-    return [{'name': 'Test printer 1', 'description': 'This is the first test printer'},
-            {'name': 'Test printer 2', 'description': 'This is the second test printer'}]
+    result = requests.get(BASE_URL + 'active-printers').json()
+    printers = []
+    for user in result:
+        printers.extend(user['active_printers'])
+
+    return printers
 
 
 class GetAvailablePrintersThread(QThread):

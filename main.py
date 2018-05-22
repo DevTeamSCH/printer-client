@@ -15,11 +15,14 @@ class PrinterMainWindow(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.load_available_printers()
+        self.refresh()
 
-    def openOptionsWindow(self):
-        optionsDialog = OptionsDialog()
-        optionsDialog.exec_()
+    def open_options_window(self):
+        options_dialog = OptionsDialog()
+        options_dialog.exec_()
+
+    def refresh(self):
+        self.load_available_printers()
 
     def load_available_printers(self):
         self.thread = GetAvailablePrintersThread()
@@ -27,6 +30,15 @@ class PrinterMainWindow(QMainWindow):
         self.thread.start()
 
     def available_printers_loaded(self, printers):
+        for printer in printers:
+            item = QListWidgetItem(self.ui.available_printer_list)
+            self.ui.available_printer_list.addItem(item)
+            item_widget = PrinterListItemWidget()
+            item_widget.load_data(printer)
+            item.setSizeHint(item_widget.sizeHint())
+            self.ui.available_printer_list.setItemWidget(item, item_widget)
+
+    def my_printers_loaded(self, printers):
         for printer in printers:
             item = QListWidgetItem(self.ui.available_printer_list)
             self.ui.available_printer_list.addItem(item)
@@ -44,7 +56,7 @@ class PrinterListItemWidget(QWidget):
 
     def load_data(self, printer):
         self.ui.printername.setText(printer['name'])
-        self.ui.printerdescription.setText(printer['description'])
+        self.ui.printerdescription.setText(printer['comment'])
 
 
 if __name__ == "__main__":
