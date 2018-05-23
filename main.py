@@ -24,15 +24,17 @@ class PrinterMainWindow(QMainWindow):
 
     def refresh(self):
         self.load_available_printers()
-        self.load_my_printers()
+        # self.load_my_printers()
 
     def load_available_printers(self):
+        self.ui.available_printer_list.clear()
         self.available_printers_thread = ApiThread(get_available_printers)
         self.available_printers_thread.have_result.connect(self.available_printers_loaded)
         self.available_printers_thread.error.connect(self.error_handler)
         self.available_printers_thread.start()
 
     def load_my_printers(self):
+        self.ui.my_printers_list.clear()
         self.my_printers_thread = ApiThread(get_my_printers)
         self.my_printers_thread.have_result.connect(self.my_printers_loaded)
         self.my_printers_thread.error.connect(self.error_handler)
@@ -71,8 +73,11 @@ class PrinterListItemWidget(QWidget):
         self.ui.setupUi(self)
 
     def load_data(self, printer):
-        self.ui.printername.setText(printer['name'])
-        self.ui.printerdescription.setText(printer['comment'])
+        self.ui.name_label.setText(printer['name'])
+        self.ui.owner_label.setText(printer['owner'])
+        self.ui.room_label.setText(printer['room'])
+        self.ui.type_label.setText(printer['type'])
+        self.ui.comment_label.setText(printer['comment'])
 
 
 if __name__ == "__main__":

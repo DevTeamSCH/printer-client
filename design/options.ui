@@ -89,7 +89,7 @@
    <item alignment="Qt::AlignLeft">
     <widget class="QCheckBox" name="startBox">
      <property name="text">
-      <string>A program indítása a számítógép indításakor.</string>
+      <string>Open client when the computer starts</string>
      </property>
     </widget>
    </item>

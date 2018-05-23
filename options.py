@@ -7,7 +7,7 @@ from design.options_ui import Ui_OptionsDialog
 class Options:
 
     def __init__(self):
-        self.language = "Hungarian"
+        self.language = "English"
         self.apiKey = ""
         self.startWithSystem = False
 

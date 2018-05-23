@@ -4,6 +4,10 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from options import options_instance
 
 BASE_URL = 'http://127.0.0.1:8000/api/v1/'
+TYPE_CHOICES = {
+    "BW": "Black and white",
+    "CL": "Color"
+}
 
 
 def get_headers():
@@ -17,7 +21,11 @@ def get_available_printers():
     result = requests.get(BASE_URL + 'active-printers', headers=get_headers()).json()
     printers = []
     for user in result:
-        printers.extend(user['active_printers'])
+        for printer in user['active_printers']:
+            printer['owner'] = user['name']
+            printer['room'] = user['room']
+            printer['type'] = TYPE_CHOICES[printer['type']]
+            printers.append(printer)
 
     return printers
 
