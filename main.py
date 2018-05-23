@@ -6,13 +6,15 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QListWidgetItem,
 from design.main_ui import Ui_MainWindow
 from design.myprinterslistitem_ui import Ui_MyPrintersListItem
 from design.printerlistitem_ui import Ui_PrinterListItem
-from options import OptionsDialog
+from options import OptionsDialog, options_instance
 from printer_api import ApiThread, get_available_printers, get_my_printers, update_printer_status
+from active_printers import ActivePrinters
 
 
 class PrinterMainWindow(QMainWindow):
     available_printers_thread = None
     my_printers_thread = None
+    start = True
 
     def __init__(self):
         super().__init__()
@@ -59,6 +61,15 @@ class PrinterMainWindow(QMainWindow):
             item_widget.load_data(printer)
             item.setSizeHint(item_widget.sizeHint())
             self.ui.my_printers_list.setItemWidget(item, item_widget)
+
+        if self.start:
+            self.start = False
+            if options_instance.inactivatePrinters:
+                activePrinters = ActivePrinters()
+                activePrinters.load_from_file()
+                for printer in activePrinters.activePrinters:
+                    #TODO
+                    pass
 
 
 class PrinterListItemWidget(QWidget):
