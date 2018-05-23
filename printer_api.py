@@ -1,3 +1,5 @@
+import json
+
 import requests
 from PyQt5.QtCore import QThread, pyqtSignal
 
@@ -14,7 +16,10 @@ def get_headers():
     if options_instance.apiKey is None or options_instance.apiKey is '':
         raise ValueError('No api key provided')
 
-    return {'Authorization': 'Token ' + options_instance.apiKey}
+    return {
+        'Authorization': 'Token ' + options_instance.apiKey,
+        'Content-Type': 'application/json'
+    }
 
 
 def get_available_printers():
@@ -32,6 +37,15 @@ def get_available_printers():
 
 def get_my_printers():
     return requests.get(BASE_URL + 'my-printers', headers=get_headers()).json()
+
+
+def update_printer_status(printer_id, status):
+    content = json.dumps({'status': status})
+    response = requests.patch(BASE_URL + 'my-printers/' + str(printer_id) + '/', content, headers=get_headers())
+    if response.status_code is 404:
+        raise Exception('Printer not found, please refresh')
+
+    return [response.json()]
 
 
 class ApiThread(QThread):
