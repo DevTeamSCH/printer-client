@@ -5,7 +5,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 
 from options import options_instance
 
-BASE_URL = 'http://127.0.0.1:8000/api/v1/'
+BASE_URL = 'http://donald.sch.bme.hu:4465/api/v1/'
 TYPE_CHOICES = {
     "BW": "Black and white",
     "CL": "Color"
@@ -14,7 +14,7 @@ TYPE_CHOICES = {
 
 def get_headers():
     if options_instance.apiKey is None or options_instance.apiKey is '':
-        raise ValueError('No api key provided')
+        raise Exception('No api key provided')
 
     return {
         'Authorization': 'Token ' + options_instance.apiKey,
@@ -24,6 +24,9 @@ def get_headers():
 
 def get_available_printers():
     result = requests.get(BASE_URL + 'active-printers', headers=get_headers()).json()
+    if type(result) is dict:
+        raise Exception(result['detail'])
+
     printers = []
     for user in result:
         for printer in user['active_printers']:
@@ -36,7 +39,11 @@ def get_available_printers():
 
 
 def get_my_printers():
-    return requests.get(BASE_URL + 'my-printers', headers=get_headers()).json()
+    result = requests.get(BASE_URL + 'my-printers', headers=get_headers()).json()
+    if type(result) is dict:
+        raise Exception(result['detail'])
+
+    return result
 
 
 def update_printer_status(printer_id, status):
