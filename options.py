@@ -9,7 +9,7 @@ class Options:
     def __init__(self):
         self.language = "English"
         self.apiKey = ""
-        self.serverURL = "defaultURL"
+        self.serverURL = ""
         self.inactivatePrinters = True
         self.startWithSystem = False
 

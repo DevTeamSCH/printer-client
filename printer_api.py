@@ -5,11 +5,17 @@ from PyQt5.QtCore import QThread, pyqtSignal
 
 from options import options_instance
 
-BASE_URL = 'http://donald.sch.bme.hu:4465/api/v1/'
 TYPE_CHOICES = {
     "BW": "Black and white",
     "CL": "Color"
 }
+
+
+def get_base_url():
+    if options_instance.serverURL is None or options_instance.serverURL is "":
+        raise Exception("No server URL provided")
+
+    return options_instance.serverURL
 
 
 def get_headers():
@@ -23,7 +29,7 @@ def get_headers():
 
 
 def get_available_printers():
-    result = requests.get(BASE_URL + 'active-printers', headers=get_headers()).json()
+    result = requests.get(get_base_url() + 'active-printers', headers=get_headers()).json()
     if type(result) is dict:
         raise Exception(result['detail'])
 
@@ -39,24 +45,31 @@ def get_available_printers():
 
 
 def get_my_printers():
-    result = requests.get(BASE_URL + 'my-printers', headers=get_headers()).json()
+    result = requests.get(get_base_url() + 'my-printers', headers=get_headers()).json()
     if type(result) is dict:
         raise Exception(result['detail'])
 
     return result
 
 
+def get_printers():
+    return {
+        'active-printers': get_available_printers(),
+        'my-printers': get_my_printers()
+    }
+
+
 def update_printer_status(printer_id, status):
     content = json.dumps({'status': status})
-    response = requests.patch(BASE_URL + 'my-printers/' + str(printer_id) + '/', content, headers=get_headers())
+    response = requests.patch(get_base_url() + 'my-printers/' + str(printer_id) + '/', content, headers=get_headers())
     if response.status_code is 404:
         raise Exception('Printer not found, please refresh')
 
-    return [response.json()]
+    return response.json()
 
 
 class ApiThread(QThread):
-    have_result = pyqtSignal(list)
+    have_result = pyqtSignal(object)
     error = pyqtSignal(str)
 
     def __init__(self, func):

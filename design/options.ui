@@ -89,7 +89,7 @@
    <item>
     <widget class="QLineEdit" name="serverURLEdit">
      <property name="text">
-      <string>defaultURL</string>
+      <string/>
      </property>
      <property name="placeholderText">
       <string>Server URL</string>
