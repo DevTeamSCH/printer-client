@@ -1,5 +1,6 @@
 import json
 
+
 class ActivePrinters:
     def __init__(self):
         self.activePrinters = []
@@ -16,4 +17,3 @@ class ActivePrinters:
         with open('active_printers.json', 'w') as json_data:
             json.dump(self.__dict__, json_data)
         pass
-

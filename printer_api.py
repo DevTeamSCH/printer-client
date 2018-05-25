@@ -68,6 +68,11 @@ def update_printer_status(printer_id, status):
     return response.json()
 
 
+def update_status_multiple(printers):
+    for printer_id, status in printers:
+        update_printer_status(printer_id, status)
+
+
 class ApiThread(QThread):
     have_result = pyqtSignal(object)
     error = pyqtSignal(str)

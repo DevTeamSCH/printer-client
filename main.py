@@ -1,15 +1,13 @@
-import functools
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QListWidgetItem, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QListWidgetItem
 
+import api_wrapper
 from active_printers import ActivePrinters
 from design.main_ui import Ui_MainWindow
 from design.myprinterslistitem_ui import Ui_MyPrintersListItem
 from design.printerlistitem_ui import Ui_PrinterListItem
 from options import OptionsDialog, options_instance
-from printer_api import ApiThread, update_printer_status
-from printer_api import get_printers
 
 
 class PrinterMainWindow(QMainWindow):
@@ -29,10 +27,7 @@ class PrinterMainWindow(QMainWindow):
     def refresh(self):
         self.ui.available_printer_list.clear()
         self.ui.my_printers_list.clear()
-        self.refresh_thread = ApiThread(get_printers)
-        self.refresh_thread.have_result.connect(self.refresh_done)
-        self.refresh_thread.error.connect(error_handler)
-        self.refresh_thread.start()
+        api_wrapper.refresh(self.refresh_done)
 
     def refresh_done(self, result):
         self.available_printers_loaded(result['active-printers'])
@@ -60,8 +55,18 @@ class PrinterMainWindow(QMainWindow):
                 active_printers = ActivePrinters()
                 active_printers.load_from_file()
                 for printer in active_printers.activePrinters:
-                    # TODO
+                    # TODO: Itt ossze kene rakni egy id -> status dictionary-t, pl { '1': true, '2': true}
                     pass
+
+                # TODO: es meghivni vele az api_wrapper.update_status_multiple fuggvenyt
+
+    def offline_mode_changed(self):
+        if self.ui.offline_mode_checkbox.isChecked():
+            # TODO: Le kell menteni az aktiv nyomtatokat, es az osszeset deaktivalni
+            pass
+        else:
+            # TODO: A lementett aktiv nyomtatokat vissza kell allitani
+            pass
 
 
 class PrinterListItemWidget(QWidget):
@@ -91,17 +96,7 @@ class MyPrintersListItemWidget(QWidget):
 
     def checkbox_clicked(self):
         self.printer['status'] = self.ui.active_check_box.isChecked()
-        self.update_printer_thread = ApiThread(functools.partial(update_printer_status, self.printer['id'], self.printer['status']))
-        self.update_printer_thread.error.connect(error_handler)
-        self.update_printer_thread.start()
-
-
-def error_handler(message):
-    message_box = QMessageBox()
-    message_box.setIcon(QMessageBox.Critical)
-    message_box.setWindowTitle("Error")
-    message_box.setText(message)
-    message_box.exec_()
+        api_wrapper.update_status(self.printer['id'], self.printer['status'])
 
 
 if __name__ == "__main__":

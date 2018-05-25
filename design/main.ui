@@ -36,7 +36,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="offline_mode_checkbox">
           <property name="text">
            <string>Offline mode</string>
           </property>
@@ -137,9 +137,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>offline_mode_checkbox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>offline_mode_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>255</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>open_options_window()</slot>
   <slot>refresh()</slot>
+  <slot>offline_mode_changed()</slot>
  </slots>
 </ui>
