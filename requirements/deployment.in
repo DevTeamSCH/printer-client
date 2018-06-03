@@ -1,0 +1,2 @@
+-r requirements.in
+PyInstaller==3.3.1
