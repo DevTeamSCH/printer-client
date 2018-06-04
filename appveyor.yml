@@ -16,14 +16,15 @@ build_script:
 
     pyinstaller main.py --windowed
 
-    iscc scripts\printer_client.iss
+    iscc printer_client.iss
 artifacts:
-- path: Output\printer_client_setup.exe
+- path: scripts\Output\printer_client_setup.exe
+  name: setup
 deploy:
 - provider: GitHub
   auth_token:
     secure: AZ4o/W1K9Z7ojmXeIaUtCfK+KrferwfKdZMkBIJOLqe+tB62UERm1JvnR/VVp6JN
-  artifact: Output\printer_client_setup.exe
-  force_update: true
+  artifact: setup
+  force_update: false
   on:
     APPVEYOR_REPO_TAG: true
