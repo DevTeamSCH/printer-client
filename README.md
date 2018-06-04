@@ -25,4 +25,4 @@ PyInstaller-el minden platformon előállítható python környezet nélkül mű
 Ez a dist mappába helyezi az operációs rendszernek megfelelő programot.
 
 ### Inno Setup
-Windows-os telepítő program az [Inno Setup](http://www.jrsoftware.org/isinfo.php)-al készíthető. Telepítés után a `compil32 /cc printer_client.iss` parancsal az Output mappába kerül egy telepítő exe.
+Windows-os telepítő program az [Inno Setup](http://www.jrsoftware.org/isinfo.php)-al készíthető. Telepítés után a `iscc printer_client.iss` parancsal az Output mappába kerül egy telepítő exe. A verzió megadható manuálisan is a /DVersion=<verzió> kapcsoló használatával.

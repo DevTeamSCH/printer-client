@@ -2,9 +2,11 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Printer client"
-#define MyAppVersion "0.1"
+#ifndef Version
+	#define Version "0.1"
+#endif
 #define MyAppPublisher "DevTeam"
-#define MyAppExeName "main.exe"
+#define MyAppExeName "printer_client.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -12,12 +14,12 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{A8787505-C5D8-46A7-83E0-10BEAF5A0404}
 AppName={#MyAppName}
-AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVersion={#Version}
+;AppVerName={#MyAppName} {#Version}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename=printer_client_{#MyAppVersion}
+OutputBaseFilename=printer_client_{#Version}
 Compression=lzma
 SolidCompression=yes
 
