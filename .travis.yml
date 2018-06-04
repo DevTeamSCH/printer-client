@@ -12,8 +12,11 @@ script:
 - pyinstaller main.py --windowed
 - chmod +x scripts/createappdir.sh
 - scripts/createappdir.sh
+- ls -la
+- ls -la dist
 - wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
 - chmod a+x appimagetool-x86_64.AppImage
+- modprobe fuse
 - ./appimagetool-x86_64.AppImage PrinterClient.AppDir
 
 deploy:
