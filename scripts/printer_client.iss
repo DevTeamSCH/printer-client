@@ -4,7 +4,7 @@
 #define MyAppName "Printer client"
 	#define Version "1.0"
 #define MyAppPublisher "DevTeam"
-#define MyAppExeName "printer_client.exe"
+#define MyAppExeName "main.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
