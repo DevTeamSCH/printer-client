@@ -2,9 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Printer client"
-#ifndef Version
-	#define Version "0.1"
-#endif
+	#define Version "1.0"
 #define MyAppPublisher "DevTeam"
 #define MyAppExeName "printer_client.exe"
 
@@ -19,7 +17,7 @@ AppVersion={#Version}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputBaseFilename=printer_client_{#Version}
+OutputBaseFilename=printer_client_setup
 Compression=lzma
 SolidCompression=yes
 

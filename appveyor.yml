@@ -1,0 +1,12 @@
+enviroment:
+    - PYTHON: "C:\Python36"
+    
+install:
+- SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+- python -m pip install --upgrade pip
+- pip install -r requirements\deployment.txt
+
+build_script:
+- scripts\generateui.bat
+- pyinstaller main.py --windowed
+- iscc printer_client.iss
