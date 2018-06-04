@@ -1,12 +1,28 @@
-enviroment:
-    PYTHON: "C:\Python36"
-    
+version: 1.0.{build}
+skip_non_tags: true
+environment:
+  PYTHON: C:\Python36
 install:
-- SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
-- python -m pip install --upgrade pip
-- pip install -r requirements\deployment.txt
+- cmd: >-
+    SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
 
+    python -m pip install --upgrade pip
+
+    pip install -r requirements\deployment.txt
 build_script:
-- scripts\generateui.bat
-- pyinstaller main.py --windowed
-- iscc printer_client.iss
+- cmd: >-
+    scripts\generateui.bat
+
+    pyinstaller main.py --windowed
+
+    iscc printer_client.iss
+artifacts:
+- path: Output\printer_client_setup.exe
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: AZ4o/W1K9Z7ojmXeIaUtCfK+KrferwfKdZMkBIJOLqe+tB62UERm1JvnR/VVp6JN
+  artifact: Output\printer_client_setup.exe
+  force_update: true
+  on:
+    APPVEYOR_REPO_TAG: true
