@@ -1,0 +1,23 @@
+if: tag IS present
+language: python
+
+install:
+- pip install -r requirements/deployment.txt
+
+script:
+- scripts/generateui.sh
+- pyinstaller main.py --windowed
+- scripts/createappdir.sh
+- wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+- chmod a+x appimagetool-x86_64.AppImage
+- appimagetool-x86_64.AppImage PrinterClient.AppDir
+
+deploy:
+  provider: releases
+  api_key:
+    secure: HLiQLaKk7AHtCGsG3UP7Fboe9/VVKbn2RqEKa822/63SxpgoMlqK5Lf9nA/w1NG30YCF73Zv7WHNPoivl/VLmE6UQlIYND3qNPYf0ap8iODY1jZs/qq/qSKIJYPr48tpC9V/SbkkVRxoPEkX9PkHhzouf9ZMRltRJ1oRHWN9L3YyY3ykcSb8aQtClx+YjFWc3RIfFwbWiYxiU6LsVpundre5+E+Qbo6mk2B2oJmGQq+x7J51pL8fZ7tBSVq0JsaNkIXZQO6CA6scAxgnILeiySVHMTcKw04H0mMaqV1l/PFSVVGRBtIjBZlMRVaefFoz1HYsuZ/eAv4ZxlVm5Hbj4oOXOhPW0cFT71QfXM3acaPysSm4uwOevCDH5hiJybjPJ8pT8L7BhF9+GtiPKnW81KwpnfjqEPrUZCyETH7yn5/alVacPKbic34DmdCZ5txIGhopBnW80zB0sYnx3iuAdRZ4eyCay0jtOtdlVBEzd7dGJZ13caaj3Sl/8SsXT95kfKKPFXJNJWIWG7LXZmw+/Mgll4/+ACHVWrG8+iV2fXwryyNBDi0jt+pc4zFmo0DckMtoC+i2WqQCTNdz4PSzw0Wo454Age/6X5zz0uHkbEmaGzhOv2A6WmprWo9/HWZxX3O49tliApJnSV/3Be3HYCh2kcBDJdD7MymX47GjZVg=
+  file: PrinterClient-x86_64.AppImage
+  skip_cleanup: true
+  on:
+    repo: DevTeamSCH/printer-client
+    tags: true
