@@ -16,7 +16,7 @@ build_script:
 
     pyinstaller main.py --windowed
 
-    iscc printer_client.iss
+    iscc scripts\printer_client.iss
 artifacts:
 - path: Output\printer_client_setup.exe
 deploy:
