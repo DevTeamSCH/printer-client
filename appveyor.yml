@@ -1,17 +1,21 @@
 version: 1.0.{build}
-skip_non_tags: true
 environment:
   PYTHON: C:\Python36
 install:
 - cmd: >-
     SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+
     python -m pip install --upgrade pip
+
     pip install -r requirements\deployment.txt
+
     choco install innosetup
 build_script:
 - cmd: >-
     scripts\generateui.bat
+
     pyinstaller main.py --windowed
+
     iscc printer_client.iss
 artifacts:
 - path: Output\printer_client_setup.exe
