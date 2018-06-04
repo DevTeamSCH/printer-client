@@ -18,4 +18,4 @@ Type=Application
 Categories=Utility;
 EOF
 
-cp icon.png ../PrinterClient.AppDir/icon.png
+cp ../icon.png ../PrinterClient.AppDir/icon.png
