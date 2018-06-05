@@ -2,7 +2,6 @@
 cd "${0%/*}"
 mkdir --parents ../PrinterClient.AppDir/usr/bin
 cp -r ../dist/main/* ../PrinterClient.AppDir/usr/bin
-chmod +x ../PrinterClient.AppDir/usr/bin/main
 
 cat << 'EOF' >> ../PrinterClient.AppDir/AppRun
 #!/bin/bash

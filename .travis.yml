@@ -11,6 +11,7 @@ script:
 - pyinstaller main.py --windowed
 - chmod +x scripts/createappdir.sh
 - scripts/createappdir.sh
+- chmod +x PrinterClient.AppDir/AppRun
 - wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
 - chmod a+x appimagetool-x86_64.AppImage
 - sudo modprobe fuse
