@@ -9,5 +9,5 @@ chardet==3.0.4            # via requests
 idna==2.6                 # via requests
 pyqt5==5.9.2
 requests==2.18.4
-sip==4.19.6
+sip==4.19.8               # via pyqt5
 urllib3==1.22             # via requests
