@@ -1,4 +1,5 @@
-# printer-client
+# printer-client [![Build Status](https://travis-ci.org/DevTeamSCH/printer-client.svg?branch=master)](https://travis-ci.org/DevTeamSCH/printer-client) [![Build status](https://ci.appveyor.com/api/projects/status/sp4903v02cyiqfpm/branch/master?svg=true)](https://ci.appveyor.com/project/ferencmarkizay/printer-client/branch/master)
+
 ## Követelmények
 * Python 3
 * Pip
