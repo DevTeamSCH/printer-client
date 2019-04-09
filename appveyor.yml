@@ -9,7 +9,7 @@ install:
 
     pip install pipenv
 
-    pipenv sync --dev
+    pipenv install --system --dev
 
     choco install innosetup
 build_script:
