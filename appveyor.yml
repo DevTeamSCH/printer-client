@@ -7,14 +7,16 @@ install:
 
     python -m pip install --upgrade pip
 
-    pip install -r requirements\deployment.txt
+    pip install pipenv
+
+    pipenv sync --dev
 
     choco install innosetup
 build_script:
 - cmd: >-
     scripts\generateui.bat
 
-    pyinstaller main.py --windowed
+    pipenv run build
 
     iscc scripts\printer_client.iss
 artifacts:
