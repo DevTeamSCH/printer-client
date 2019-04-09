@@ -9,7 +9,7 @@ install:
 script:
 - chmod +x scripts/generateui.sh
 - chmod +x scripts/createappdir.sh
-- scripts/generateui.sh
+- pipenv run generateui_sh
 - pipenv run build
 - scripts/createappdir.sh
 - chmod +x PrinterClient.AppDir/AppRun
