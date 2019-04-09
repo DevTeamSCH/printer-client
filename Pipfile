@@ -14,6 +14,6 @@ requests = "*"
 python_version = "3.7"
 
 [scripts]
-build = "pyinstaller --windowed main.py"
+build = "pyinstaller --windowed src/main.py"
 generateui_ps = "powershell scripts/generateui.ps1"
 generateui_sh = "scripts/generateui.sh"
