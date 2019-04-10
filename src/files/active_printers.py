@@ -4,10 +4,11 @@ import json
 class ActivePrinters:
     def __init__(self):
         self.activePrinters = []
+        self.load_from_file()
 
     def load_from_file(self):
         try:
-            with open('active_printers.json', 'r') as json_data:
+            with open('active_printers.json') as json_data:
                 d = json.load(json_data)
                 self.activePrinters = d['activePrinters']
         except FileNotFoundError:

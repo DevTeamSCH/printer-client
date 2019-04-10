@@ -1,9 +1,8 @@
 import json
 
 import requests
-from PyQt5.QtCore import QThread, pyqtSignal
 
-from options import options_instance
+from files.options import options_instance
 
 TYPE_CHOICES = {
     "BW": "Black and white",
@@ -72,18 +71,3 @@ def update_status_multiple(printers):
     for printer_id, status in printers:
         update_printer_status(printer_id, status)
 
-
-class ApiThread(QThread):
-    have_result = pyqtSignal(object)
-    error = pyqtSignal(str)
-
-    def __init__(self, func):
-        super().__init__()
-        self.func = func
-
-    def run(self):
-        try:
-            self.have_result.emit(self.func())
-        except Exception as e:
-            self.error.emit(str(e))
-            pass
